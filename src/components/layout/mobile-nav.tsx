@@ -1,9 +1,9 @@
 "use client";
 
 import { useState } from "react";
-import Link from "next/link";
 import { MenuIcon } from "lucide-react";
-import { Button, buttonVariants } from "@/components/ui/button";
+import { ButtonLink } from "@/components/shared/button-link";
+import { Button } from "@/components/ui/button";
 import {
   Sheet,
   SheetContent,
@@ -14,7 +14,6 @@ import {
 } from "@/components/ui/sheet";
 import { ctaNav, mainNav } from "@/content/navigation";
 import { siteConfig } from "@/content/site-config";
-import { cn } from "@/lib/utils";
 import { NavLink } from "./nav-link";
 
 /** Slide-in menu shown below the md breakpoint (phones and small tablets). */
@@ -51,13 +50,9 @@ export function MobileNav() {
           ))}
         </nav>
         <SheetFooter>
-          <Link
-            href={ctaNav.href}
-            onClick={close}
-            className={cn(buttonVariants({ size: "lg" }), "h-11 w-full")}
-          >
+          <ButtonLink href={ctaNav.href} onClick={close} className="w-full">
             {ctaNav.title}
-          </Link>
+          </ButtonLink>
         </SheetFooter>
       </SheetContent>
     </Sheet>

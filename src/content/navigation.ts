@@ -1,7 +1,10 @@
 /**
  * Every link in the header, mobile menu and footer comes from here,
  * so they always stay in sync. Add or rename pages in this one file.
+ * (Service links come from services.ts.)
  */
+import { serviceHref, services } from "./services";
+
 export type NavItem = {
   title: string;
   href: string;
@@ -19,12 +22,10 @@ export const ctaNav: NavItem = { title: "Get in touch", href: "/contact" };
 export const footerNav: { title: string; items: NavItem[] }[] = [
   {
     title: "Services",
-    items: [
-      { title: "AI Agents", href: "/services/ai-agents" },
-      { title: "SaaS Development", href: "/services/saas-development" },
-      { title: "Web Development", href: "/services/web-development" },
-      { title: "AI Marketing", href: "/services/ai-marketing" },
-    ],
+    items: services.map((s) => ({
+      title: s.navTitle,
+      href: serviceHref(s.slug),
+    })),
   },
   {
     title: "Company",

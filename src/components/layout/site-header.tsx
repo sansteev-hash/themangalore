@@ -1,9 +1,7 @@
-import Link from "next/link";
-import { buttonVariants } from "@/components/ui/button";
+import { ButtonLink } from "@/components/shared/button-link";
 import { Container } from "@/components/shared/container";
 import { Logo } from "@/components/shared/logo";
 import { ctaNav, mainNav } from "@/content/navigation";
-import { cn } from "@/lib/utils";
 import { MobileNav } from "./mobile-nav";
 import { NavLink } from "./nav-link";
 
@@ -27,15 +25,13 @@ export function SiteHeader() {
         </nav>
 
         <div className="flex items-center gap-2">
-          <Link
+          <ButtonLink
             href={ctaNav.href}
-            className={cn(
-              buttonVariants({ size: "lg" }),
-              "hidden px-4 md:inline-flex",
-            )}
+            size="md"
+            className="hidden md:inline-flex"
           >
             {ctaNav.title}
-          </Link>
+          </ButtonLink>
           <div className="md:hidden">
             <MobileNav />
           </div>

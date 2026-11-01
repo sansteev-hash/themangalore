@@ -1,6 +1,6 @@
 import { CtaBand } from "@/components/sections/cta-band";
 import { Hero } from "@/components/sections/home/hero";
-import { Process } from "@/components/sections/home/process";
+import { Process } from "@/components/sections/process";
 import { TrainingProducts } from "@/components/sections/home/training-products";
 import { WhyUs } from "@/components/sections/home/why-us";
 import { ServicesGrid } from "@/components/sections/services-grid";

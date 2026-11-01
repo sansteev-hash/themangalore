@@ -18,7 +18,7 @@ export const siteConfig = {
     display: "+91 63665 07370",
   },
   location: {
-    street: "Kelle Court, 3rd Floor, Hampankette",
+    street: "Kelle Court, 3rd Floor, Hampankatte",
     city: "Mangalore",
     region: "Karnataka",
     country: "India",

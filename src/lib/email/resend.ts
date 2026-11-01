@@ -40,6 +40,13 @@ export async function sendEmail({ to, subject, text, replyTo }: Email) {
   });
 
   if (!response.ok) {
-    throw new Error(`Resend responded with ${response.status}`);
+    // Resend explains the problem (e.g. unverified domain) in the body.
+    const body = (await response.json().catch(() => null)) as {
+      name?: string;
+      message?: string;
+    } | null;
+    throw new Error(
+      `Resend responded with ${response.status}: ${body?.name ?? "unknown"} — ${body?.message ?? "no details"}`,
+    );
   }
 }

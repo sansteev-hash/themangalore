@@ -48,7 +48,8 @@ The contact form and product waitlist store submissions in **Supabase** and
 send new-enquiry alerts by email through **Resend**.
 
 1. Create a Supabase project (region: Mumbai / `ap-south-1` recommended).
-2. In Supabase → **SQL Editor**, run `supabase/migrations/0001_leads_and_waitlist.sql`.
+2. In Supabase → **SQL Editor**, run each file in `supabase/migrations/` in order
+   (`0001_…`, then `0002_…`).
 3. Copy the project URL and **secret** key into `.env.local`
    (`SUPABASE_URL`, `SUPABASE_SECRET_KEY`).
 4. Optional: create a Resend API key and set `RESEND_API_KEY` and `LEAD_ALERT_TO`.

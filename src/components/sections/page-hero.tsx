@@ -27,7 +27,10 @@ export function PageHero({
   children,
 }: PageHeroProps) {
   return (
-    <Section className="dark relative overflow-hidden py-14 sm:py-20">
+    <Section
+      reveal={false}
+      className="dark relative overflow-hidden py-14 sm:py-20"
+    >
       <div aria-hidden className="pointer-events-none absolute inset-0">
         <div className="absolute inset-0 bg-grid" />
         <div className="absolute -top-32 right-0 size-120 rounded-full bg-brand-blue/20 blur-3xl" />

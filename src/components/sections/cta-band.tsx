@@ -21,7 +21,7 @@ export function CtaBand({
   children,
 }: CtaBandProps) {
   return (
-    <Section className="dark relative overflow-hidden border-b">
+    <Section reveal={false} className="dark relative overflow-hidden border-b">
       <div
         aria-hidden
         className="pointer-events-none absolute inset-x-0 -bottom-40 mx-auto h-80 max-w-3xl rounded-full bg-brand-blue/25 blur-3xl"

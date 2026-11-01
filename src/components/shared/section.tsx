@@ -3,6 +3,12 @@ import { Container } from "./container";
 
 type SectionProps = React.ComponentProps<"section"> & {
   containerClassName?: string;
+  /**
+   * Fade content in as it scrolls into view (CSS only, see `reveal` in
+   * globals.css). Turn off for sections with absolutely positioned
+   * decoration, since the moving container would become their anchor.
+   */
+  reveal?: boolean;
 };
 
 /**
@@ -12,6 +18,7 @@ type SectionProps = React.ComponentProps<"section"> & {
 export function Section({
   className,
   containerClassName,
+  reveal = true,
   children,
   ...props
 }: SectionProps) {
@@ -20,7 +27,9 @@ export function Section({
       className={cn("bg-background py-16 text-foreground sm:py-24", className)}
       {...props}
     >
-      <Container className={containerClassName}>{children}</Container>
+      <Container className={cn(reveal && "reveal", containerClassName)}>
+        {children}
+      </Container>
     </section>
   );
 }

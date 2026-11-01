@@ -5,6 +5,8 @@ import { homeContent } from "@/content/home";
 import { AgentDemoCard } from "./agent-demo-card";
 
 // Entrance animation: subtle fade/slide, switched off for "reduce motion" users.
+// Not used on the heading or intro: text that starts invisible is painted
+// later, which delays Largest Contentful Paint (a Core Web Vital).
 const enter =
   "animate-in fade-in slide-in-from-bottom-4 duration-700 fill-mode-both motion-reduce:animate-none";
 
@@ -13,6 +15,7 @@ export function Hero() {
 
   return (
     <Section
+      reveal={false}
       className="dark relative overflow-hidden pt-20 pb-20 sm:pt-28 sm:pb-28"
       containerClassName="grid items-center gap-14 lg:grid-cols-2"
     >
@@ -30,20 +33,16 @@ export function Hero() {
         >
           {hero.eyebrow}
         </p>
-        <h1
-          className={`${enter} text-5xl font-bold tracking-tight text-balance delay-100 sm:text-6xl lg:text-7xl`}
-        >
+        <h1 className="text-5xl font-bold tracking-tight text-balance sm:text-6xl lg:text-7xl">
           {hero.titleLead}{" "}
           <span className="bg-linear-to-r from-brand-light to-blue-500 bg-clip-text text-transparent">
             {hero.titleHighlight}
           </span>
         </h1>
-        <p
-          className={`${enter} max-w-xl text-lg text-pretty text-muted-foreground delay-200 sm:text-xl`}
-        >
+        <p className="max-w-xl text-lg text-pretty text-muted-foreground sm:text-xl">
           {hero.description}
         </p>
-        <div className={`${enter} flex flex-wrap gap-3 delay-300`}>
+        <div className={`${enter} flex flex-wrap gap-3 delay-150`}>
           <ButtonLink href={hero.primaryCta.href}>
             {hero.primaryCta.title}
             <ArrowRightIcon aria-hidden />
@@ -55,7 +54,7 @@ export function Hero() {
       </div>
 
       <AgentDemoCard
-        className={`${enter} relative w-full max-w-lg delay-500 lg:justify-self-end`}
+        className={`${enter} relative w-full max-w-lg delay-300 lg:justify-self-end`}
       />
     </Section>
   );

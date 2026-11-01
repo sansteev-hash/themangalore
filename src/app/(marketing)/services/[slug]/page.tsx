@@ -28,7 +28,7 @@ export async function generateMetadata({
   params,
 }: PageProps<"/services/[slug]">): Promise<Metadata> {
   const service = getService((await params).slug);
-  if (!service) return {};
+  if (!service) return { title: "Page not found" };
 
   return {
     title: service.title,

@@ -3,15 +3,34 @@ import { ArrowRightIcon } from "lucide-react";
 import { Section } from "@/components/shared/section";
 import { SectionHeading } from "@/components/shared/section-heading";
 import { serviceHref, services } from "@/content/services";
+import { cn } from "@/lib/utils";
 
-/** Links to every service except the current one. */
-export function RelatedServices({ currentSlug }: { currentSlug: string }) {
+type RelatedServicesProps = {
+  /** Leave out to list every service. */
+  currentSlug?: string;
+  title?: string;
+  className?: string;
+};
+
+/** Compact links to every service except the current one. */
+export function RelatedServices({
+  currentSlug,
+  title = "Explore our other services",
+  className = "pt-0 sm:pt-0",
+}: RelatedServicesProps) {
   const others = services.filter((s) => s.slug !== currentSlug);
 
   return (
-    <Section className="pt-0 sm:pt-0">
-      <SectionHeading title="Explore our other services" />
-      <ul className="mt-10 grid gap-4 sm:grid-cols-3">
+    <Section className={className}>
+      <SectionHeading title={title} />
+      <ul
+        className={cn(
+          "mt-10 grid gap-4",
+          others.length === 4
+            ? "sm:grid-cols-2 lg:grid-cols-4"
+            : "sm:grid-cols-3",
+        )}
+      >
         {others.map((service) => (
           <li key={service.slug}>
             <Link

@@ -1,4 +1,4 @@
-import { MailIcon, MapPinIcon } from "lucide-react";
+import { MailIcon, MapPinIcon, PhoneIcon } from "lucide-react";
 import { ContactForm } from "@/components/forms/contact-form";
 import { PageHero } from "@/components/sections/page-hero";
 import { RelatedServices } from "@/components/sections/service/related-services";
@@ -47,11 +47,25 @@ export default function ContactPage() {
 }
 
 function ContactDetails() {
-  const { city, region, country } = siteConfig.location;
+  const { street, city, region, country } = siteConfig.location;
 
   return (
     <div className="flex flex-col gap-4">
       <h2 className="text-2xl font-bold tracking-tight">Reach us</h2>
+      <a
+        href={`tel:${siteConfig.phone.value}`}
+        className="group flex items-center gap-4 rounded-2xl border bg-card p-6 transition-colors outline-none hover:border-brand-light focus-visible:ring-3 focus-visible:ring-ring/50"
+      >
+        <span className="flex size-12 shrink-0 items-center justify-center rounded-xl bg-accent text-primary">
+          <PhoneIcon className="size-6" aria-hidden />
+        </span>
+        <span>
+          <span className="block text-sm text-muted-foreground">Call us</span>
+          <span className="font-semibold group-hover:text-primary">
+            {siteConfig.phone.display}
+          </span>
+        </span>
+      </a>
       <a
         href={`mailto:${siteConfig.email}`}
         className="group flex items-center gap-4 rounded-2xl border bg-card p-6 transition-colors outline-none hover:border-brand-light focus-visible:ring-3 focus-visible:ring-ring/50"
@@ -71,10 +85,12 @@ function ContactDetails() {
           <MapPinIcon className="size-6" aria-hidden />
         </span>
         <span>
-          <span className="block text-sm text-muted-foreground">Based in</span>
-          <span className="font-semibold">
+          <span className="block text-sm text-muted-foreground">Visit us</span>
+          <address className="font-semibold not-italic">
+            {street},
+            <br />
             {city}, {region}, {country}
-          </span>
+          </address>
         </span>
       </div>
     </div>

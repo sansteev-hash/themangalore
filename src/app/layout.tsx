@@ -1,5 +1,6 @@
 import type { Metadata } from "next";
 import { Inter } from "next/font/google";
+import { Analytics } from "@vercel/analytics/next";
 import { siteConfig } from "@/content/site-config";
 import { JsonLd } from "@/components/shared/json-ld";
 import { defaultTitle } from "@/lib/seo";
@@ -34,6 +35,9 @@ export default function RootLayout({ children }: LayoutProps<"/">) {
       <body className="flex min-h-full flex-col">
         <JsonLd data={organizationSchema()} />
         {children}
+        {/* Cookie-free page-view analytics. Only active on Vercel once enabled
+            in the dashboard; does nothing in development. */}
+        <Analytics />
       </body>
     </html>
   );

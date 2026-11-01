@@ -21,9 +21,11 @@ export function organizationSchema() {
     logo: `${url}/icon/large`,
     description,
     email,
+    telephone: siteConfig.phone.value,
     slogan: siteConfig.tagline,
     address: {
       "@type": "PostalAddress",
+      streetAddress: location.street,
       addressLocality: location.city,
       addressRegion: location.region,
       addressCountry: "IN",

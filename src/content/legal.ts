@@ -5,9 +5,9 @@ import { siteConfig } from "./site-config";
  *
  * IMPORTANT: this is a plain-English starting point that describes what the
  * site does today (contact form + waitlist stored in Supabase, email alerts
- * via Resend, hosting on Vercel, no cookies or analytics). Have it reviewed
- * by a legal professional before launch, and update it whenever the site
- * starts collecting new data (e.g. analytics in Milestone 8).
+ * via Resend, hosting and cookie-free Web Analytics on Vercel, no cookies).
+ * Have it reviewed by a legal professional before launch, and update it
+ * whenever the site starts collecting new data.
  */
 export type LegalSection = {
   heading: string;
@@ -53,7 +53,9 @@ export const privacyPolicy: LegalDocument = {
     {
       heading: "Cookies and analytics",
       paragraphs: [
-        "Our website does not currently use advertising or analytics cookies. If this changes, we will update this policy and ask for your consent where required.",
+        "Our website does not use cookies for advertising or tracking.",
+        "We use Vercel Web Analytics to understand how our website is used — for example, which pages are visited, the referring website, and the general type of browser, device and country. It does not use cookies, and it reports anonymous, combined statistics: we cannot use it to identify individual visitors.",
+        "If we ever add cookies or other tracking, we will update this policy and ask for your consent where required.",
       ],
     },
     {
@@ -62,7 +64,7 @@ export const privacyPolicy: LegalDocument = {
         "We share information only with trusted service providers who help us run our business, and only as needed to provide their services:",
       ],
       list: [
-        "Vercel — hosts our website",
+        "Vercel — hosts our website and provides anonymous visitor statistics",
         "Supabase — securely stores contact enquiries and waitlist signups",
         "Resend — delivers email notifications about new enquiries to our team",
       ],

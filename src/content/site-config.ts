@@ -11,7 +11,14 @@ export const siteConfig = {
   locale: "en_IN",
   // TODO: replace with the real contact address before launch.
   email: "hello@themangalore.in",
+  phone: {
+    /** International format, used for tap-to-call links and search engines. */
+    value: "+916366507370",
+    /** How it's shown on the page. */
+    display: "+91 63665 07370",
+  },
   location: {
+    street: "Kelle Court, 3rd Floor, Hampankette",
     city: "Mangalore",
     region: "Karnataka",
     country: "India",

@@ -1,4 +1,3 @@
-import type { Metadata } from "next";
 import { ArrowRightIcon, CheckIcon } from "lucide-react";
 import { CtaBand } from "@/components/sections/cta-band";
 import { Faq } from "@/components/sections/faq";
@@ -8,11 +7,13 @@ import { ButtonLink } from "@/components/shared/button-link";
 import { Section } from "@/components/shared/section";
 import { SectionHeading } from "@/components/shared/section-heading";
 import { trainingContent } from "@/content/training";
+import { pageMetadata } from "@/lib/seo";
 
-export const metadata: Metadata = {
+export const metadata = pageMetadata({
   title: "AI Training",
   description: trainingContent.hero.description,
-};
+  path: "/training",
+});
 
 export default function TrainingPage() {
   const { hero, programs, topics, formats, faqs, cta } = trainingContent;

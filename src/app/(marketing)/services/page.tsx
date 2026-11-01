@@ -1,14 +1,15 @@
-import type { Metadata } from "next";
 import { CtaBand } from "@/components/sections/cta-band";
 import { PageHero } from "@/components/sections/page-hero";
 import { Process } from "@/components/sections/process";
 import { ServicesGrid } from "@/components/sections/services-grid";
+import { pageMetadata } from "@/lib/seo";
 
-export const metadata: Metadata = {
+export const metadata = pageMetadata({
   title: "Services",
   description:
     "AI agent development, custom SaaS, websites and web apps, and AI-powered digital marketing — delivered by one AI-first team in Mangalore, India.",
-};
+  path: "/services",
+});
 
 export default function ServicesPage() {
   return (

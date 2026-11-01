@@ -1,4 +1,3 @@
-import type { Metadata } from "next";
 import { CtaBand } from "@/components/sections/cta-band";
 import { IconCardGrid } from "@/components/sections/icon-card-grid";
 import { PageHero } from "@/components/sections/page-hero";
@@ -6,11 +5,13 @@ import { RelatedServices } from "@/components/sections/service/related-services"
 import { Section } from "@/components/shared/section";
 import { SectionHeading } from "@/components/shared/section-heading";
 import { aboutContent } from "@/content/about";
+import { pageMetadata } from "@/lib/seo";
 
-export const metadata: Metadata = {
+export const metadata = pageMetadata({
   title: "About",
   description: aboutContent.hero.description,
-};
+  path: "/about",
+});
 
 export default function AboutPage() {
   const { hero, story, pillars, values, cta } = aboutContent;

@@ -1,15 +1,16 @@
-import type { Metadata } from "next";
 import { MailIcon, MapPinIcon } from "lucide-react";
 import { PageHero } from "@/components/sections/page-hero";
 import { RelatedServices } from "@/components/sections/service/related-services";
 import { Section } from "@/components/shared/section";
 import { contactContent } from "@/content/contact";
 import { siteConfig } from "@/content/site-config";
+import { pageMetadata } from "@/lib/seo";
 
-export const metadata: Metadata = {
+export const metadata = pageMetadata({
   title: "Contact",
   description: `Get in touch with ${siteConfig.name} about AI agents, SaaS development, websites, AI marketing or AI training.`,
-};
+  path: "/contact",
+});
 
 // The enquiry form will be added to the left column in Milestone 6.
 export default function ContactPage() {

@@ -1,6 +1,8 @@
 import { PlusIcon } from "lucide-react";
 import { Section } from "@/components/shared/section";
+import { JsonLd } from "@/components/shared/json-ld";
 import { SectionHeading } from "@/components/shared/section-heading";
+import { faqSchema } from "@/lib/structured-data";
 
 type FaqProps = {
   title?: string;
@@ -14,6 +16,7 @@ type FaqProps = {
 export function Faq({ title = "Frequently asked questions", faqs }: FaqProps) {
   return (
     <Section containerClassName="max-w-3xl">
+      <JsonLd data={faqSchema(faqs)} />
       <SectionHeading eyebrow="FAQ" title={title} />
 
       <div className="mt-10 divide-y rounded-2xl border bg-card">

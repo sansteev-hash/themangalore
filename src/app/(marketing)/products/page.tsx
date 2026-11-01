@@ -1,13 +1,14 @@
-import type { Metadata } from "next";
 import { CtaBand } from "@/components/sections/cta-band";
 import { IconCardGrid } from "@/components/sections/icon-card-grid";
 import { PageHero } from "@/components/sections/page-hero";
 import { productsContent } from "@/content/products";
+import { pageMetadata } from "@/lib/seo";
 
-export const metadata: Metadata = {
+export const metadata = pageMetadata({
   title: "Products",
   description: productsContent.hero.description,
-};
+  path: "/products",
+});
 
 // The waitlist links to the contact page for now; a dedicated signup form
 // backed by Supabase replaces it in Milestone 7.

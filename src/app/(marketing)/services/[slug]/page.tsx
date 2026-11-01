@@ -9,7 +9,10 @@ import { RelatedServices } from "@/components/sections/service/related-services"
 import { ServiceFeatures } from "@/components/sections/service/service-features";
 import { ButtonLink } from "@/components/shared/button-link";
 import { ctaNav } from "@/content/navigation";
-import { getService, services } from "@/content/services";
+import { getService, serviceHref, services } from "@/content/services";
+import { JsonLd } from "@/components/shared/json-ld";
+import { pageMetadata } from "@/lib/seo";
+import { serviceSchema } from "@/lib/structured-data";
 
 // The whole page must be static. This also means an unknown slug is fully
 // rendered before anything is sent, so notFound() returns a real 404 status.
@@ -30,10 +33,12 @@ export async function generateMetadata({
   const service = getService((await params).slug);
   if (!service) return { title: "Page not found" };
 
-  return {
+  return pageMetadata({
     title: service.title,
     description: service.summary,
-  };
+    path: serviceHref(service.slug),
+    hasOwnImage: true,
+  });
 }
 
 export default async function ServicePage({
@@ -44,6 +49,7 @@ export default async function ServicePage({
 
   return (
     <>
+      <JsonLd data={serviceSchema(service)} />
       <PageHero
         breadcrumbs={[
           { title: "Home", href: "/" },

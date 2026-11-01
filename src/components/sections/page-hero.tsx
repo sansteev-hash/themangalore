@@ -1,6 +1,8 @@
 import Link from "next/link";
 import { ChevronRightIcon, type LucideIcon } from "lucide-react";
+import { JsonLd } from "@/components/shared/json-ld";
 import { Section } from "@/components/shared/section";
+import { breadcrumbSchema } from "@/lib/structured-data";
 
 export type Breadcrumb = { title: string; href?: string };
 
@@ -32,6 +34,7 @@ export function PageHero({
       </div>
 
       <div className="relative flex max-w-3xl flex-col items-start gap-5">
+        {breadcrumbs && <JsonLd data={breadcrumbSchema(breadcrumbs)} />}
         {breadcrumbs && (
           <nav aria-label="Breadcrumb">
             <ol className="flex flex-wrap items-center gap-1.5 text-sm text-muted-foreground">

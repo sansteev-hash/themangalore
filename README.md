@@ -18,25 +18,45 @@ npm run dev                  # http://localhost:3000
 
 ## Scripts
 
-| Command             | What it does                                            |
-| ------------------- | ------------------------------------------------------- |
-| `npm run dev`       | Start the local development server                      |
-| `npm run build`     | Create a production build                               |
-| `npm run start`     | Serve the production build locally                      |
-| `npm run lint`      | Check code for problems (ESLint)                        |
-| `npm run typecheck` | Check TypeScript types                                  |
-| `npm run format`    | Auto-format all files (Prettier)                        |
-| `npm run check`     | Lint + typecheck + format check (run before committing) |
+| Command             | What it does                                              |
+| ------------------- | --------------------------------------------------------- |
+| `npm run dev`       | Start the local development server                        |
+| `npm run build`     | Create a production build                                 |
+| `npm run start`     | Serve the production build locally                        |
+| `npm run lint`      | Check code for problems (ESLint)                          |
+| `npm run typecheck` | Check TypeScript types                                    |
+| `npm run format`    | Auto-format all files (Prettier)                          |
+| `npm test`          | Run unit tests (Vitest)                                   |
+| `npm run check`     | Lint + typecheck + format + tests (run before committing) |
 
 ## Project structure
 
 ```
 src/
-  app/            Pages and layouts (App Router)
-  components/ui/  shadcn/ui components (add more with `npx shadcn@latest add <name>`)
-  content/        Site text and settings (site-config.ts)
-  lib/            Shared helpers
+  actions/        Server Actions (form submissions)
+  app/            Pages, layouts and SEO files (App Router)
+  components/     ui/ (shadcn), forms/, sections/, layout/, shared/
+  content/        Site text and settings (site-config.ts, services.ts, …)
+  lib/            Helpers: forms engine, Supabase, email, SEO, validation
+supabase/
+  migrations/     Database setup SQL
 ```
+
+## Forms & backend setup
+
+The contact form and product waitlist store submissions in **Supabase** and
+send new-enquiry alerts by email through **Resend**.
+
+1. Create a Supabase project (region: Mumbai / `ap-south-1` recommended).
+2. In Supabase → **SQL Editor**, run `supabase/migrations/0001_leads_and_waitlist.sql`.
+3. Copy the project URL and **secret** key into `.env.local`
+   (`SUPABASE_URL`, `SUPABASE_SECRET_KEY`).
+4. Optional: create a Resend API key and set `RESEND_API_KEY` and `LEAD_ALERT_TO`.
+5. Set `FORMS_ENABLED=true`, restart `npm run dev`, and send a test enquiry.
+6. Add the same variables in Vercel → Settings → Environment Variables and redeploy.
+
+View enquiries in Supabase → **Table Editor** → `leads` (update `status` as you follow up).
+Tables use Row Level Security with no public access; only the server writes.
 
 ## Brand
 

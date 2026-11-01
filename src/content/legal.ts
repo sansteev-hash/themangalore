@@ -4,10 +4,10 @@ import { siteConfig } from "./site-config";
  * Privacy policy and terms of use.
  *
  * IMPORTANT: this is a plain-English starting point that describes what the
- * site does today (no forms, no cookies, no analytics). Have it reviewed by a
- * legal professional before launch, and update it whenever the site starts
- * collecting new data (contact form in Milestone 6, Supabase in Milestone 7,
- * analytics in Milestone 8).
+ * site does today (contact form + waitlist stored in Supabase, email alerts
+ * via Resend, hosting on Vercel, no cookies or analytics). Have it reviewed
+ * by a legal professional before launch, and update it whenever the site
+ * starts collecting new data (e.g. analytics in Milestone 8).
  */
 export type LegalSection = {
   heading: string;
@@ -34,7 +34,7 @@ export const privacyPolicy: LegalDocument = {
     {
       heading: "Information we collect",
       paragraphs: [
-        "We only collect personal information that you choose to share with us — for example, your name, email address, phone number and message when you contact us by email.",
+        "We only collect personal information that you choose to share with us: the name, email address, phone number, company, area of interest and message you enter in our contact form or send us by email, and the email address you give when joining our product waitlist.",
         "Like most websites, our hosting provider automatically records basic technical information when you visit, such as your IP address, browser type and the pages you request. This is used to keep the site secure and running reliably.",
       ],
     },
@@ -59,13 +59,24 @@ export const privacyPolicy: LegalDocument = {
     {
       heading: "Sharing your information",
       paragraphs: [
-        "We share information only with trusted service providers who help us run our business — such as website hosting and email providers — and only as needed to provide their services. We may also disclose information when required by law.",
+        "We share information only with trusted service providers who help us run our business, and only as needed to provide their services:",
+      ],
+      list: [
+        "Vercel — hosts our website",
+        "Supabase — securely stores contact enquiries and waitlist signups",
+        "Resend — delivers email notifications about new enquiries to our team",
+      ],
+    },
+    {
+      heading: "Where your information is stored",
+      paragraphs: [
+        "These providers may store or process information in India or in other countries. We choose reputable providers that protect data with industry-standard security. We may also disclose information when required by law.",
       ],
     },
     {
       heading: "How long we keep your information",
       paragraphs: [
-        "We keep personal information only for as long as we need it for the purposes described in this policy, or as required by law. After that, it is securely deleted.",
+        "We keep personal information only for as long as we need it for the purposes described in this policy, or as required by law. Waitlist emails are kept until our products launch or until you ask us to remove you. After that, information is securely deleted.",
       ],
     },
     {

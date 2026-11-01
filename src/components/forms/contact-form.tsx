@@ -9,11 +9,11 @@ import { Input } from "@/components/ui/input";
 import { Label } from "@/components/ui/label";
 import { Textarea } from "@/components/ui/textarea";
 import {
-  HONEYPOT_FIELD,
   contactLimits,
   type ContactField,
   type ContactFormState,
 } from "@/lib/contact/types";
+import { HoneypotField } from "./honeypot-field";
 import { cn } from "@/lib/utils";
 
 type ContactFormProps = {
@@ -196,20 +196,7 @@ export function ContactForm({ interestOptions }: ContactFormProps) {
         {errorText("message")}
       </div>
 
-      {/* Honeypot: hidden from people and screen readers; bots fill it in. */}
-      <div
-        aria-hidden
-        className="absolute -left-[9999px] h-px w-px overflow-hidden"
-      >
-        <label htmlFor={HONEYPOT_FIELD}>Leave this field empty</label>
-        <input
-          id={HONEYPOT_FIELD}
-          name={HONEYPOT_FIELD}
-          type="text"
-          tabIndex={-1}
-          autoComplete="off"
-        />
-      </div>
+      <HoneypotField />
 
       <div className="flex flex-col gap-4 sm:flex-row sm:items-center sm:justify-between">
         <p className="text-xs text-muted-foreground">

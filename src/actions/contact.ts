@@ -1,38 +1,60 @@
 "use server";
 
-import { headers } from "next/headers";
-import { isContactFormEnabled } from "@/lib/contact/config";
-import { processContactSubmission } from "@/lib/contact/process-submission";
 import type { ContactFormState } from "@/lib/contact/types";
+import { contactFields } from "@/lib/contact/types";
+import { saveLead } from "@/lib/data/submissions";
+import { buildLeadAlert } from "@/lib/email/lead-alert";
+import { isEmailConfigured, sendEmail } from "@/lib/email/resend";
+import { getClientKey } from "@/lib/forms/client-key";
+import { isFormsEnabled } from "@/lib/forms/config";
+import { processFormSubmission } from "@/lib/forms/process-submission";
 import { createRateLimiter } from "@/lib/rate-limit";
+import { contactSchema, interestOptions } from "@/lib/validations/contact";
 
 // 5 messages per 10 minutes per visitor (per server instance).
 const limiter = createRateLimiter({ limit: 5, windowMs: 10 * 60 * 1000 });
 
 /**
  * Server Action behind the contact form. It's a public endpoint, so every
- * input is validated on the server in processContactSubmission().
+ * input is validated on the server in processFormSubmission().
  */
 export async function submitContactForm(
   _previousState: ContactFormState,
   formData: FormData,
 ): Promise<ContactFormState> {
-  const requestHeaders = await headers();
-  const clientKey =
-    requestHeaders.get("x-forwarded-for")?.split(",")[0]?.trim() ||
-    requestHeaders.get("x-real-ip") ||
-    "unknown";
-
-  return processContactSubmission(formData, {
-    enabled: isContactFormEnabled(),
-    clientKey,
+  return processFormSubmission(formData, {
+    schema: contactSchema,
+    fields: contactFields,
+    enabled: isFormsEnabled(),
+    clientKey: await getClientKey(),
     limiter,
-    onValid: async (data) => {
-      // Milestone 7 replaces this with: save to Supabase + send email alert.
-      // Log only non-personal details.
-      console.info("[contact] valid enquiry received", {
-        interest: data.interest,
-      });
+    messages: {
+      disabled: "The contact form isn't available right now. Please email us.",
+      failure:
+        "Something went wrong sending your message. Please try again or email us.",
+    },
+    onValid: async (lead) => {
+      // 1. Save first — if this fails, the visitor is asked to try again.
+      await saveLead(lead);
+
+      // 2. Then alert the team. A failed email must not lose the lead,
+      //    which is already safely stored in Supabase.
+      if (!isEmailConfigured()) return;
+      try {
+        const label =
+          interestOptions.find((o) => o.value === lead.interest)?.label ??
+          lead.interest;
+        await sendEmail({
+          to: process.env.LEAD_ALERT_TO!,
+          replyTo: lead.email,
+          ...buildLeadAlert(lead, label),
+        });
+      } catch (error) {
+        console.error(
+          "[contact] lead saved, alert email failed:",
+          (error as Error).message,
+        );
+      }
     },
   });
 }

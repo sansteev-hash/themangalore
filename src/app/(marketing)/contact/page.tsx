@@ -5,7 +5,7 @@ import { RelatedServices } from "@/components/sections/service/related-services"
 import { Section } from "@/components/shared/section";
 import { contactContent } from "@/content/contact";
 import { siteConfig } from "@/content/site-config";
-import { isContactFormEnabled } from "@/lib/contact/config";
+import { isFormsEnabled } from "@/lib/forms/config";
 import { pageMetadata } from "@/lib/seo";
 import { interestOptions } from "@/lib/validations/contact";
 
@@ -16,7 +16,7 @@ export const metadata = pageMetadata({
 });
 
 export default function ContactPage() {
-  const formEnabled = isContactFormEnabled();
+  const formEnabled = isFormsEnabled();
 
   return (
     <>
@@ -34,7 +34,7 @@ export default function ContactPage() {
           </div>
         </Section>
       ) : (
-        // Until submissions are stored (Milestone 7), visitors use email.
+        // While forms are switched off, visitors use email.
         <Section containerClassName="grid gap-10 lg:grid-cols-2 lg:gap-16">
           <ContactDetails />
           <NextSteps />

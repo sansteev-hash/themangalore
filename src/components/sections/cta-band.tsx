@@ -8,6 +8,8 @@ type CtaBandProps = {
   description?: string;
   primary?: { title: string; href: string };
   secondary?: { title: string; href: string };
+  /** Custom content (e.g. a signup form) shown instead of the buttons. */
+  children?: React.ReactNode;
 };
 
 /** Navy call-to-action band, used at the bottom of most pages. */
@@ -16,6 +18,7 @@ export function CtaBand({
   description,
   primary = ctaNav,
   secondary,
+  children,
 }: CtaBandProps) {
   return (
     <Section className="dark relative overflow-hidden border-b">
@@ -32,17 +35,19 @@ export function CtaBand({
             {description}
           </p>
         )}
-        <div className="flex flex-wrap justify-center gap-3">
-          <ButtonLink href={primary.href}>
-            {primary.title}
-            <ArrowRightIcon aria-hidden />
-          </ButtonLink>
-          {secondary && (
-            <ButtonLink href={secondary.href} variant="outline">
-              {secondary.title}
+        {children ?? (
+          <div className="flex flex-wrap justify-center gap-3">
+            <ButtonLink href={primary.href}>
+              {primary.title}
+              <ArrowRightIcon aria-hidden />
             </ButtonLink>
-          )}
-        </div>
+            {secondary && (
+              <ButtonLink href={secondary.href} variant="outline">
+                {secondary.title}
+              </ButtonLink>
+            )}
+          </div>
+        )}
       </div>
     </Section>
   );

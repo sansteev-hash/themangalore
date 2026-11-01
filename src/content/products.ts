@@ -44,6 +44,10 @@ export const productsContent = {
 
   waitlist: {
     title: "Be the first to know",
+    /** Shown with the signup form (when forms are switched on). */
+    formDescription:
+      "Our first products are in development. Join the waitlist for early access and launch updates — no spam, unsubscribe any time.",
+    /** Fallback while forms are switched off. */
     description:
       "Our first products are in development. Get in touch to join the early-access list and help shape what we build.",
     cta: { title: "Join the waitlist", href: "/contact" },
